@@ -7,21 +7,21 @@ function getCombos(chars, k, indent) {
 
     if (k === 0) {
         console.log(`${debugMsg} base case returns ['']`)
-        return ['']
-    } else if (chars === '') {
+        return [[ ]]
+    } else if (chars.length === 0) {
         console.log(`${debugMsg} base case returns []`)
         return []
     }
 
     let combinations = []
-    let head = chars.slice(0, 1)
+    let head = chars[0]
     let tail = chars.slice(1, chars.length)
     console.log(`${debugMsg} part 1, get combos with head ${head}`)
     let tailCombos = getCombos(tail, k - 1, indent + 1)
     console.log(`${".".repeat(indent)} Adding head ${head} to tail combos:`)
     for (let tailCombo of tailCombos) {
         console.log(`${".".repeat(indent)} New combination ${head} ${tailCombo}`)
-        combinations.push(head + tailCombo)
+        combinations.push([head, ...tailCombo])
     }
 
     console.log(`${debugMsg} part-2, get combos without head ${head}`)
@@ -32,4 +32,4 @@ function getCombos(chars, k, indent) {
 }
 
 console.log('2-combinations of "ABC":')
-console.log('Results:', getCombos('ABC', 2))
+console.log('Results:', getCombos([1,'C','B'], 2))
